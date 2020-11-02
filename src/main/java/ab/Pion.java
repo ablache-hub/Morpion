@@ -9,5 +9,5 @@ public class Pion {
     }
 
     static Pion X = new Pion('X');
-    static Pion Y = new Pion('O');
+    static Pion O = new Pion('O');
 }
