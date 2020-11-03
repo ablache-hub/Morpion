@@ -14,16 +14,24 @@ public class Partie {
     // changer de joueur
     public int jouerCoup(Joueur joueur, int isPlaying) {
         Scanner in = new Scanner(System.in);
-
         System.out.println(joueur.nom + ", entrez un numéro de case à jouer (entre 1 et 9)");
-        while (!in.hasNext("[1-9]")) {
-            in.next();
-            System.out.println("Erreur, vous devez entrer un entier en 1 et 9)");
+
+        int input = in.nextInt();
+
+        while ((input < 1) || (input > 9) || (this.grille.plateau[input - 1] == 'X')
+                || (this.grille.plateau[input - 1] == 'O')) {
+            System.out.println(
+                    "Choix invalide, veuillez rejouer (le nombre doit être situé entre 1 et 9 et ne pas déjà avoir été joué)");
+
+            input = in.nextInt();
         }
 
-        // int input = in.nextInt();
+        // while (!in.hasNext("[1-9]")) {
+        // in.next();
+        // System.out.println("Erreur, vous devez entrer un entier en 1 et 9)");
+        // }
 
-        this.grille.plateau[in.nextInt() - 1] = joueur.pion.symbole;
+        this.grille.plateau[input - 1] = joueur.pion.symbole;
         if (isPlaying == 1) {
             isPlaying = 2;
         } else {
@@ -51,31 +59,31 @@ public class Partie {
                 coups += 1;
                 joueur1.score += 1;
 
-                if ((verifVerti1(this.grille.plateau[0], this.grille.plateau[1], this.grille.plateau[2]))
-                        || verifVerti2(this.grille.plateau[3], this.grille.plateau[4], this.grille.plateau[5])
-                        || verifVerti3(this.grille.plateau[6], this.grille.plateau[7], this.grille.plateau[8])
-                        || verifHori1(this.grille.plateau[0], this.grille.plateau[3], this.grille.plateau[6])
-                        || verifHori2(this.grille.plateau[1], this.grille.plateau[4], this.grille.plateau[7])
-                        || verifHori3(this.grille.plateau[2], this.grille.plateau[5], this.grille.plateau[8])
-                        || verifDiag1(this.grille.plateau[0], this.grille.plateau[4], this.grille.plateau[8])
-                        || verifDiag2(this.grille.plateau[2], this.grille.plateau[4], this.grille.plateau[6])) {
+                if ((verifLigne(this.grille.plateau[0], this.grille.plateau[1], this.grille.plateau[2]))
+                        || verifLigne(this.grille.plateau[3], this.grille.plateau[4], this.grille.plateau[5])
+                        || verifLigne(this.grille.plateau[6], this.grille.plateau[7], this.grille.plateau[8])
+                        || verifLigne(this.grille.plateau[0], this.grille.plateau[3], this.grille.plateau[6])
+                        || verifLigne(this.grille.plateau[1], this.grille.plateau[4], this.grille.plateau[7])
+                        || verifLigne(this.grille.plateau[2], this.grille.plateau[5], this.grille.plateau[8])
+                        || verifLigne(this.grille.plateau[0], this.grille.plateau[4], this.grille.plateau[8])
+                        || verifLigne(this.grille.plateau[2], this.grille.plateau[4], this.grille.plateau[6])) {
                     gagne = true;
                     gagnant = "Le joueur " + joueur1.nom + " a gagné en " + joueur1.score + " coups";
                 }
 
-            } else if (joueur2.num == isPlaying) {
+            } else {
                 isPlaying = jouerCoup(joueur2, isPlaying);
                 coups += 1;
                 joueur2.score += 1;
 
-                if ((verifVerti1(this.grille.plateau[0], this.grille.plateau[1], this.grille.plateau[2]))
-                        || verifVerti2(this.grille.plateau[3], this.grille.plateau[4], this.grille.plateau[5])
-                        || verifVerti3(this.grille.plateau[6], this.grille.plateau[7], this.grille.plateau[8])
-                        || verifHori1(this.grille.plateau[0], this.grille.plateau[3], this.grille.plateau[6])
-                        || verifHori2(this.grille.plateau[1], this.grille.plateau[4], this.grille.plateau[7])
-                        || verifHori3(this.grille.plateau[2], this.grille.plateau[5], this.grille.plateau[8])
-                        || verifDiag1(this.grille.plateau[0], this.grille.plateau[4], this.grille.plateau[8])
-                        || verifDiag2(this.grille.plateau[2], this.grille.plateau[4], this.grille.plateau[6])) {
+                if ((verifLigne(this.grille.plateau[0], this.grille.plateau[1], this.grille.plateau[2]))
+                        || verifLigne(this.grille.plateau[3], this.grille.plateau[4], this.grille.plateau[5])
+                        || verifLigne(this.grille.plateau[6], this.grille.plateau[7], this.grille.plateau[8])
+                        || verifLigne(this.grille.plateau[0], this.grille.plateau[3], this.grille.plateau[6])
+                        || verifLigne(this.grille.plateau[1], this.grille.plateau[4], this.grille.plateau[7])
+                        || verifLigne(this.grille.plateau[2], this.grille.plateau[5], this.grille.plateau[8])
+                        || verifLigne(this.grille.plateau[0], this.grille.plateau[4], this.grille.plateau[8])
+                        || verifLigne(this.grille.plateau[2], this.grille.plateau[4], this.grille.plateau[6])) {
                     gagne = true;
                     gagnant = "Le gagnant est " + joueur2.nom;
                 }
@@ -90,59 +98,11 @@ public class Partie {
         return gagnant;
     }
 
-    public boolean verifVerti1(char a, char b, char c) {
+    public boolean verifLigne(char a, char b, char c) {
         if ((a == 'X' && b == 'X' && c == 'X') || (a == 'O' && b == 'O' && c == 'O')) {
             return true;
         } else
             return false;
     }
 
-    public boolean verifVerti2(char a, char b, char c) {
-        if ((a == 'X' && b == 'X' && c == 'X') || (a == 'O' && b == 'O' && c == 'O')) {
-            return true;
-        } else
-            return false;
-    }
-
-    public boolean verifVerti3(char a, char b, char c) {
-        if ((a == 'X' && b == 'X' && c == 'X') || (a == 'O' && b == 'O' && c == 'O')) {
-            return true;
-        } else
-            return false;
-    }
-
-    public boolean verifHori1(char a, char b, char c) {
-        if ((a == 'X' && b == 'X' && c == 'X') || (a == 'O' && b == 'O' && c == 'O')) {
-            return true;
-        } else
-            return false;
-    }
-
-    public boolean verifHori2(char a, char b, char c) {
-        if ((a == 'X' && b == 'X' && c == 'X') || (a == 'O' && b == 'O' && c == 'O')) {
-            return true;
-        } else
-            return false;
-    }
-
-    public boolean verifHori3(char a, char b, char c) {
-        if ((a == 'X' && b == 'X' && c == 'X') || (a == 'O' && b == 'O' && c == 'O')) {
-            return true;
-        } else
-            return false;
-    }
-
-    public boolean verifDiag1(char a, char b, char c) {
-        if ((a == 'X' && b == 'X' && c == 'X') || (a == 'O' && b == 'O' && c == 'O')) {
-            return true;
-        } else
-            return false;
-    }
-
-    public boolean verifDiag2(char a, char b, char c) {
-        if ((a == 'X' && b == 'X' && c == 'X') || (a == 'O' && b == 'O' && c == 'O')) {
-            return true;
-        } else
-            return false;
-    }
 }
