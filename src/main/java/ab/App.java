@@ -26,7 +26,8 @@ public class App {
         System.out.println("Entrez nom du second joueur:");
         Joueur joueur2 = new Joueur(in.nextLine(), 2);
 
-        partie.jouer(joueur1, joueur2);
+        System.out.println(partie.jouer(joueur1, joueur2));
+        grille.affichageGrille();
 
     }
 
