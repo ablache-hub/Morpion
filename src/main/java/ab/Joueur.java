@@ -12,12 +12,9 @@ public class Joueur {
         this.score = 0;
         if (this.num == 1) {
             this.pion = Pion.X;
-            this.num = 1;
 
         } else {
             this.pion = Pion.O;
-            this.num = 2;
-            this.score = 0;
         }
 
     }
