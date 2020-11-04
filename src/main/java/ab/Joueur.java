@@ -1,11 +1,10 @@
 package ab;
 
 public class Joueur {
-    int num;
-    String nom;
-    Pion pion;
-    int score;
-    int isPlaying;
+    private int num;
+    private String nom;
+    private Pion pion;
+    private int score;
 
     public Joueur(String nom, int num) {
         this.nom = nom;
@@ -21,6 +20,26 @@ public class Joueur {
             this.score = 0;
         }
 
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public Pion getPion() {
+        return pion;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
 }

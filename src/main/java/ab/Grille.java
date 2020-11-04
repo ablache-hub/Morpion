@@ -1,25 +1,33 @@
 package ab;
 
 public class Grille {
-    public char[] plateau;
+    private char[] getPlateau;
 
     public Grille() {
-        this.plateau = new char[9];
+        this.getPlateau = new char[9];
+    }
+
+    public char getPlateau(int index) {
+        return getPlateau[index];
+    }
+
+    public void setPlateau(int index, char symbole) {
+        this.getPlateau[index - 1] = symbole;
     }
 
     // Remplissage de la grille avec numéros de cases puis affichage
     public void genererGrille() {
-        for (int i = 0; i < this.plateau.length; i++) {
-            this.plateau[i] = Character.forDigit(i + 1, 10);
+        for (int i = 0; i < this.getPlateau.length; i++) {
+            this.getPlateau[i] = Character.forDigit(i + 1, 10);
         }
 
     }
 
     public void affichageGrille() { // Afficher la grille
-        System.out.println("\n| " + this.plateau[0] + " | " + this.plateau[1] + " | " + this.plateau[2] + " |\n"
-                + "|---|---|---|\n" + "| " + this.plateau[3] + " | " + this.plateau[4] + " | " + this.plateau[5]
-                + " |\n" + "|---|---|---|\n" + "| " + this.plateau[6] + " | " + this.plateau[7] + " | "
-                + this.plateau[8] + " |\n");
+        System.out.println("\n| " + this.getPlateau[0] + " | " + this.getPlateau[1] + " | " + this.getPlateau[2]
+                + " |\n" + "|---|---|---|\n" + "| " + this.getPlateau[3] + " | " + this.getPlateau[4] + " | "
+                + this.getPlateau[5] + " |\n" + "|---|---|---|\n" + "| " + this.getPlateau[6] + " | "
+                + this.getPlateau[7] + " | " + this.getPlateau[8] + " |\n");
 
     }
 

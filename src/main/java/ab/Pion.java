@@ -1,8 +1,7 @@
 package ab;
 
 public class Pion {
-    char symbole;
-    int emplacement;
+    private char symbole;
 
     public Pion(char symbole) {
         this.symbole = symbole;
@@ -10,4 +9,9 @@ public class Pion {
 
     static Pion X = new Pion('X');
     static Pion O = new Pion('O');
+
+    public char getSymbole() {
+        return symbole;
+    }
+
 }
